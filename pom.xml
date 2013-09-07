@@ -61,6 +61,14 @@
             <artifactId>jetty-maven-plugin</artifactId>
             <version>8.1.12.v20130726</version>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+
+
     </dependencies>
 
     <build>
