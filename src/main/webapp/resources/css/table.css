@@ -1,11 +1,13 @@
 body{
     font-family: Verdana,Geneva,Arial,sans-serif;
     font-size: small;
+    background: lightyellow;
 }
 h1,h2{
     font-weight: normal;
     color: #cc6600;
     border-bottom: thin dotted #888888;
+    text-align: center;
 }
 h1{
     font-size: 170%;
@@ -13,22 +15,21 @@ h1{
 h2{
     font-size: 130%;
 }
-blockquote{
-    font-style: italic;
-}
+
 table{
     margin-left: 20px;
     margin-right: 20px;
     border: thin solid black;
-    caption-side: bottom;
 }
 td,th{
     border: thin dotted grey;
     padding: 5px;
-    color: red;
+    color: black;
+    width: 200px;
+    height: 50px;
 }
-td{color: red;}
 caption{
     font-style: italic;
-    padding-top: 8px;
+    padding-top: 20px;
+    border: thin solid black;
 }
