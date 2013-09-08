@@ -1,6 +1,7 @@
 <web-app version="2.4"
-	xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+         xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:mvc="http://www.springframework.org/schema/mvc"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
 	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
 	<display-name>Spring MVC Application</display-name>
@@ -15,8 +16,9 @@
 		<servlet-name>mvc-dispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-    <servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>resources/*</url-pattern>
-	</servlet-mapping>
+
+    <!--<servlet-mapping>-->
+		<!--<servlet-name>default</servlet-name>-->
+		<!--<url-pattern>resources/*</url-pattern>-->
+	<!--</servlet-mapping>-->
 </web-app>
