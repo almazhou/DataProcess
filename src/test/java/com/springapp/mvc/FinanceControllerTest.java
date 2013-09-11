@@ -1,5 +1,6 @@
 package com.springapp.mvc;
 
+import com.springapp.mvc.controller.FinanceController;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
