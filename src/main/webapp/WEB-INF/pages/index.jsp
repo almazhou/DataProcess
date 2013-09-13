@@ -1,7 +1,7 @@
+ <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<html>
+<html>                                                      √
 <head>
     <title>Company Staff Information</title>
     <link type="text/css" rel="stylesheet" media="screen,projection"
@@ -11,59 +11,32 @@
 <h1>Company Staff Information</h1>
 <table summary ="This is the information about a company and it involves name, project <br> and the rate of somebody and their working years">
     <tr>
-        <th>Name</th>
+        <th>id</th>
+        <th>name</th>
         <th>Account</th>
+        <th>Time on this account</th>
         <th>Rate</th>
-        <th>Experience</th>
-        <th>Working Year</th>
-        <th>Whole Year</th>
-        <th>News</th>
+        <th>Time to Join</th>
+        <th>Total work year</th>
+        <th>Time in TW</th>
+        <th>Graduate</th>
+        <th>Once Went Abroad</th>
     </tr>
+    <c:forEach items='${employeeList}' var='employee'>
     <tr>
-        <td>AlmaZhou</td>
-        <td>MVC</td>
-        <td>3</td>
-        <td>5</td>
-        <td>5</td>
-        <td>5</td>
-        <td>5</td>
+        <td>${employee.id}</td>
+        <td>${employee.name}</td>
+        <td>${employee.account}</td>
+        <td>${employee.timeOnThisAccount}</td>
+        <td>${employee.rate}</td>
+        <td>${employee.timeToJoin}</td>
+        <td>${employee.totalWorkYear}</td>
+        <td>${employee.timeInTW}</td>
+        <td>${employee.graduate}</td>
+        <td>${employee.onceOut}</td>
     </tr>
-    <tr>
-        <td>Lucy</td>
-        <td>MVC</td>
-        <td>5</td>
-        <td>5</td>
-        <td>1</td>
-        <td>5</td>
-        <td>1</td>
-    </tr>
-    <tr>
-        <td>David</td>
-        <td>MVC</td>
-        <td>9</td>
-        <td>2</td>
-        <td>7</td>
-        <td>2</td>
-        <td>7</td>
-    </tr>
-    <tr>
-        <td>Copper</td>
-        <td>MVC</td>
-        <td>1</td>
-        <td>2</td>
-        <td>8</td>
-        <td>2</td>
-        <td>8</td>
-    </tr>
-    <tr>
-        <td>Sherry</td>
-        <td>MVC</td>
-        <td>4</td>
-        <td>3</td>
-        <td>4</td>
-        <td>3</td>
-        <td>4</td>
-    </tr>
+    </c:forEach>
+
 </table>
 </body>
 </html>

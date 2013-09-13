@@ -16,12 +16,11 @@ import static org.junit.Assert.assertThat;
 
 public class HibernateUtilsTest {
 
-    private HibernateUtils hibernateUtils;
     private Employee employee;
 
     @Before
     public void setUp() throws Exception {
-        employee = new Employee(5,"alma", "zhou", new Date(), "1354812344");
+        employee = new Employee(5,"MVC","alma",5.0,1.5,new Date(),0.9,3.0,true,true);
     }
 
     @Test
@@ -35,27 +34,26 @@ public class HibernateUtilsTest {
     public void should_get_list_in_data_base() throws Exception {
     List<Employee> list = HibernateUtils.list();
 
-    assertThat(list.get(0).getFirstname(),is("alma"));
+    assertThat(list.get(0).getName(),is("alma"));
     }
 
     @Test
     public void should_read_things_from_data_base() throws Exception {
-       Employee employee1 = new Employee(5,"5", "zhou", new Date(), "1354812344");
+       Employee employee1 = new Employee(5,"MVC","zhou",5.0,1.5,new Date(),0.9,3.0,true,true);
        HibernateUtils.save(employee1);
-        Employee readEmployee = HibernateUtils.read(613);
+        Employee readEmployee = HibernateUtils.read(2);
 
-        assertThat(readEmployee.getFirstname(),is("slsl"));
+        assertThat(readEmployee.getName(),is("zhou"));
     }
 
     @Test
     public void should_update_item_in_data_base() throws Exception {
-        employee.setFirstname("ssss");
-        Employee employee1 = new Employee(5,"5", "dddd", new Date(), "1354812344");
-        Employee update = HibernateUtils.update(employee1);
+        employee.setName("ssss");
+        Employee update = HibernateUtils.update(employee);
 
         List<Employee> list = HibernateUtils.list();
 
-        assertThat(list.get(13).getLastname(),is("zhou"));
+        assertThat(list.get(2).getName(),is("ssss"));
     }
 
     @Test

@@ -5,14 +5,19 @@
 
 <hibernate-mapping package="com.springapp.mvc">
 
-    <class name="Employee" table="EMPLOYEE">
-        <id name="id" column="ID">
+    <class name="Employee" table="employee">
+        <id name="id" column="id">
             <generator class="native"/>
         </id>
-        <property name="firstname" />
-        <property name="lastname" column="lastname"/>
-        <property name="birthDate" type="date" column="birth_date"/>
-        <property name="cellphone" column="cell_phone"/>
+        <property name="account" column="account" />
+        <property name="graduate" column="isGraduate"/>
+        <property name="name" column="name"/>
+        <property name="onceOut" column="onceOut"/>
+        <property name="rate" column="rate"/>
+        <property name="timeInTW" column="timeInTW"/>
+        <property name="timeOnThisAccount" column="account_time"/>
+        <property name="timeToJoin" column="join_time"/>
+        <property name="totalWorkYear" column="totalWorkYear"/>
     </class>
 
 </hibernate-mapping>
