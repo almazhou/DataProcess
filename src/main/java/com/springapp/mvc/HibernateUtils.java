@@ -4,7 +4,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.classic.Session;
 
-import java.util.Date;
 import java.util.List;
 
 public class HibernateUtils {
@@ -91,14 +90,15 @@ public class HibernateUtils {
     }
 
     public static void mockDateBase() {
-        Employee employee0 = new Employee(5,"MVC","zhou",5.0,1.5,new Date(),0.9,3.0,true,true);
-        Employee employee1 = new Employee(5,"ttc","xuan",8.0,3,new Date(),1.9,1.0,true,false);
-        Employee employee2 = new Employee(5,"add","alma",8.0,4,new Date(),2.3,3.0,true,false);
-        Employee employee3 = new Employee(5,"service","li",3.0,8,new Date(),0.2,5.0,true,true);
+        Employee employee0 = new Employee(5, "MVC", "zhou", 5.0, 1.5, DateUtils.createDateWithFormat("2012-09-03", "yyyy-MM-dd"), 0.9, 3.0, true, true);
+        Employee employee1 = new Employee(5, "ttc", "xuan", 8.0, 3, DateUtils.createDateWithFormat("2010-08-04", "yyyy-MM-dd"), 1.9, 1.0, true, false);
+        Employee employee2 = new Employee(5, "add", "alma", 8.0, 4, DateUtils.createDateWithFormat("2007-07-05", "yyyy-MM-dd"), 2.3, 3.0, true, false);
+        Employee employee3 = new Employee(5, "service", "li", 3.0, 8, DateUtils.createDateWithFormat("2013-08-04", "yyyy-MM-dd"), 0.2, 5.0, true, true);
 
         save(employee0);
         save(employee1);
         save(employee2);
         save(employee3);
     }
+
 }
