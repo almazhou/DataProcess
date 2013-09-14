@@ -73,10 +73,6 @@ public class Employee {
         this.rate = rate;
     }
 
-    public boolean isGraduate() {
-        return graduate;
-    }
-
     public Date getTimeToJoin() {
 
         return timeToJoin;
