@@ -28,4 +28,9 @@ public class SpreadSheet {
         String cellValueAsString = getCellValue(row, column);
         return cellValueAsString.trim().length() == 0 ? null : parseDouble(cellValueAsString);
     }
+
+    public Long getCellValueAsLong(int row, int column) {
+        String cellValue = getCellValue(row, column);
+       return cellValue.trim().length() == 0? null : Long.parseLong(cellValue.split("\\.")[0]);
+    }
 }
