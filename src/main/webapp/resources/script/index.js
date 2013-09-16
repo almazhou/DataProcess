@@ -12,3 +12,7 @@ function showTable(){
         }
     });
 }
+
+function insert(){
+     var form = $(".forms").show();
+}
