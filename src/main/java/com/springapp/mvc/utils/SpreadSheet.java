@@ -21,11 +21,13 @@ public class SpreadSheet {
         HSSFRow sheetRow = sheet.getRow(row);
         HSSFCell cell = sheetRow.getCell(column);
 
-        if ((cell.getCellType() == Cell.CELL_TYPE_NUMERIC) || (cell.getCellType() == Cell.CELL_TYPE_FORMULA)) {
+        if ((cell.getCellType() == Cell.CELL_TYPE_NUMERIC)) {
             return String.valueOf(cell.getNumericCellValue());
         } else if(cell.getCellType()==Cell.CELL_TYPE_BOOLEAN) {
             return String.valueOf(cell.getBooleanCellValue());
 
+        }else if(cell.getCellType()==Cell.CELL_TYPE_FORMULA){
+            return String.valueOf(cell.getDateCellValue());
         }
         else {
             return cell.getStringCellValue();
@@ -62,7 +64,7 @@ public class SpreadSheet {
         employee.setAccount(getCellValue(row, 1));
         employee.setName(getCellValue(row,2));
         employee.setRate(getCellValueAsDouble(row,3));
-        employee.setTimeToJoin(DateUtils.createDateWithFormat(getCellValue(row,4),"yyyyMMdd"));
+        employee.setTimeToJoin(DateUtils.createDateWithFormat(getCellValue(row,4),"dd/MM/yyyy"));
         employee.setTotalWorkYear(getCellValueAsDouble(row,5));
         employee.setTimeInTW(getCellValueAsDouble(row,6));
         employee.setGraduate(Boolean.parseBoolean(getCellValue(row,7)));
