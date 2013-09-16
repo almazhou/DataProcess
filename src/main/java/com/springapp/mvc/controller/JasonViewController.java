@@ -13,7 +13,7 @@ public class JasonViewController {
     @RequestMapping("/json/employeeList")
     public ModelAndView getEmployeeInformation() {
         ModelAndView jsonView = new ModelAndView("jsonView");
-        HibernateUtils.truncateTableByName("Employee");
+//        HibernateUtils.truncateTableByName("Employee");
         HibernateUtils.loadFromExcel("data/EmployeeInformation.xls");
         List<Employee> list = HibernateUtils.list();
         jsonView.getModel().put("employeeList",list);
