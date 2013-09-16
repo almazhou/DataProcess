@@ -1,8 +1,7 @@
 package com.springapp.mvc.utils;
 
 
-import com.springapp.mvc.Employee;
-import com.springapp.mvc.HibernateUtils;
+import com.springapp.mvc.domain.Employee;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -86,5 +85,13 @@ public class HibernateUtilsTest {
         int removedItem = HibernateUtils.truncateTableByName("Employee");
 
         assertThat(removedItem,is(4));
+    }
+
+    @Test
+    public void should_load_object_from_excel() throws Exception {
+        HibernateUtils.loadFromExcel("data/EmployeeInformation.xls");
+
+        List<Employee> list = HibernateUtils.list();
+        assertThat(list.size(),is(2));
     }
 }

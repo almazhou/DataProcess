@@ -1,5 +1,6 @@
-package com.springapp.mvc;
+package com.springapp.mvc.utils;
 
+import com.springapp.mvc.domain.Employee;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;

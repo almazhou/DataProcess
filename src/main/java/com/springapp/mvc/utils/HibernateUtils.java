@@ -1,10 +1,13 @@
-package com.springapp.mvc;
+package com.springapp.mvc.utils;
 
+import com.springapp.mvc.domain.Employee;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.classic.Session;
 
+import java.io.IOException;
 import java.util.List;
 
 public class HibernateUtils {
@@ -142,5 +145,21 @@ public class HibernateUtils {
         int i = query.executeUpdate();
         session.close();
         return i;
+    }
+
+    public static void loadFromExcel(String filePath) {
+        ReadExcelFileData readExcelFileData = new ReadExcelFileData(filePath);
+        try {
+            HSSFSheet sheet = readExcelFileData.getSheet(0);
+            SpreadSheet spreadSheet = new SpreadSheet(sheet);
+            List<Employee> employees = spreadSheet.buildEmployee();
+
+            for(Employee employee:employees){
+                save(employee);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("No such sheet");
+        }
+
     }
 }

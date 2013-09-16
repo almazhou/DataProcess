@@ -1,6 +1,9 @@
 package com.springapp.mvc;
 
 import com.springapp.mvc.controller.JasonViewController;
+import com.springapp.mvc.domain.Employee;
+import com.springapp.mvc.utils.HibernateUtils;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -11,9 +14,17 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class JasonViewControllerTest {
+
+    private JasonViewController jasonViewController;
+
+    @Before
+    public void setUp() throws Exception {
+        HibernateUtils.truncateTableByName("Employee");
+        jasonViewController = new JasonViewController();
+    }
+
     @Test
     public void should_return_data_base_information() throws Exception {
-        JasonViewController jasonViewController = new JasonViewController();
 
         ModelAndView employeeInformation = jasonViewController.getEmployeeInformation();
 
@@ -21,5 +32,13 @@ public class JasonViewControllerTest {
         assertThat(employeeInformation.getViewName(),is("jsonView"));
         List<Employee> employeeList = (List<Employee>) employeeInformation.getModel().get("employeeList");
         assertThat(employeeList.get(0).getName(),is("zhou"));
+    }
+
+    @Test
+    public void should_convert_excel_to_object() throws Exception {
+        ModelAndView employeeInformation = jasonViewController.getEmployeeInformation();
+        List<Employee> employeeList = (List<Employee>) employeeInformation.getModel().get("employeeList");
+
+        assertThat(employeeList.size(),is(2));
     }
 }

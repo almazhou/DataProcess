@@ -1,7 +1,10 @@
 package com.springapp.mvc.utils;
 
+import com.springapp.mvc.domain.Employee;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -35,4 +38,12 @@ public class SpreedSheetTest {
         assertThat(cellValueAsLong,is(new Long(1)));
     }
 
+    @Test
+    public void should_create_employee_from_excel() throws Exception {
+        List<Employee> employees = spreadSheet.buildEmployee();
+
+        assertThat(employees.size(),is(2));
+        assertThat(employees.get(0).getId(),is(new Long(1)));
+        assertThat(employees.get(0).getName(),is("zhou"));
+    }
 }

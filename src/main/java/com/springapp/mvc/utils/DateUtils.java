@@ -1,4 +1,4 @@
-package com.springapp.mvc;
+package com.springapp.mvc.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
