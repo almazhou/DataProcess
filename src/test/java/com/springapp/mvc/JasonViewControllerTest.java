@@ -20,13 +20,14 @@ public class JasonViewControllerTest {
     @Before
     public void setUp() throws Exception {
         HibernateUtils.truncateTableByName("Employee");
+        HibernateUtils.loadFromExcel("temp/EmployeeInformation.xls");
         jasonViewController = new JasonViewController();
     }
 
     @Test
     public void should_return_data_base_information() throws Exception {
 
-        ModelAndView employeeInformation = jasonViewController.getEmployeeInformation();
+        ModelAndView employeeInformation = jasonViewController.employeeInformation();
 
         assertThat(employeeInformation,notNullValue());
         assertThat(employeeInformation.getViewName(),is("jsonView"));
@@ -36,7 +37,7 @@ public class JasonViewControllerTest {
 
     @Test
     public void should_convert_excel_to_object() throws Exception {
-        ModelAndView employeeInformation = jasonViewController.getEmployeeInformation();
+        ModelAndView employeeInformation = jasonViewController.employeeInformation();
         List<Employee> employeeList = (List<Employee>) employeeInformation.getModel().get("employeeList");
 
         assertThat(employeeList.size(),is(2));

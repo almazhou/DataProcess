@@ -17,7 +17,7 @@ public class SpreedSheetTest {
 
     @Before
     public void setUp() throws Exception {
-        filePath = "data/EmployeeInformation.xls";
+        filePath = "temp/EmployeeInformation.xls";
         excelData = new ReadExcelFileData(filePath);
         spreadSheet = new SpreadSheet(excelData.getSheet(0));
 

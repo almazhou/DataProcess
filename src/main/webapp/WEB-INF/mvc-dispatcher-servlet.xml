@@ -16,6 +16,8 @@
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-
+    <bean class="com.springapp.mvc.controller.FinanceDAO">
+        <constructor-arg value="data/EmployeeInformation.xls"/>
+    </bean>
 
 </beans>

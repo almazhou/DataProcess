@@ -89,7 +89,7 @@ public class HibernateUtilsTest {
 
     @Test
     public void should_load_object_from_excel() throws Exception {
-        HibernateUtils.loadFromExcel("data/EmployeeInformation.xls");
+        HibernateUtils.loadFromExcel("temp/EmployeeInformation.xls");
 
         List<Employee> list = HibernateUtils.list();
         assertThat(list.size(),is(2));
