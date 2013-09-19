@@ -3,12 +3,14 @@ package com.springapp.mvc.controller;
 import com.springapp.mvc.domain.Employee;
 import com.springapp.mvc.utils.HibernateUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class FinanceController {
@@ -35,6 +37,16 @@ public class FinanceController {
 
         Employee employee = new Employee(id0, account, name, rate0, timeInTW0, new Date(), timeOnThisAccount0, totalWorkYear0, graduate0, onceOut0);
         HibernateUtils.save(employee);
+        return "index";
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public String doEdit(@RequestBody String employeeId) {
+        List<Employee> list = HibernateUtils.selectByCondition("id =" + employeeId);
+        if(list.size()==1&&list.get(0).getId().toString().equals(employeeId)){
+            Employee employee = list.get(0);
+            HibernateUtils.delete(employee);
+        }
         return "index";
     }
 

@@ -26,6 +26,7 @@
         <th>Time in TW</th>
         <th>Graduate</th>
         <th>Once Went Abroad</th>
+        <th>edit</th>
     </tr>
 
     <tr id="insertForms" class="forms" style="display: none">
@@ -42,7 +43,9 @@
             <td><input type="text" name="timeInTW"></td>
             <td><input type="text" name="graduate"></td>
             <td><input type="text" name="onceOut"></td>
+            <td>
             <input type="submit" value="save" class="forms" style="display: none"/>
+            </td>
         </form>
     </tr>
 
