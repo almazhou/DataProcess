@@ -1,3 +1,4 @@
+<% response.addHeader("Refresh","20"); %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -32,11 +33,11 @@
     <tr id="insertForms" class="forms" style="display: none">
         <form action="<%=request.getContextPath()%>/saveForm" method="POST">
             <td>
-                <input type="text" name="id" path ="id">
+                <input type="text" name="id">
             </td>
-            <td><input type="text" name="name" path = "name"></td>
-            <td><input type="text" name="account" path ="account"></td>
-            <td><input type="text" name="timeOnThisAccount" path = "timeOnThisAccount"></td>
+            <td><input type="text" name="name"></td>
+            <td><input type="text" name="account"></td>
+            <td><input type="text" name="timeOnThisAccount"></td>
             <td><input type="text" name="rate"></td>
             <td><input type="text" name="timeToJoin"></td>
             <td><input type="text" name="totalWorkYear"></td>

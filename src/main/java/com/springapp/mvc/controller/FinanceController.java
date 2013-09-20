@@ -41,7 +41,7 @@ public class FinanceController {
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public String doEdit(@RequestBody String employeeId) {
+    public String doDelete(@RequestBody String employeeId) {
         List<Employee> list = HibernateUtils.selectByCondition("id =" + employeeId);
         if(list.size()==1&&list.get(0).getId().toString().equals(employeeId)){
             Employee employee = list.get(0);
@@ -49,5 +49,30 @@ public class FinanceController {
         }
         return "index";
     }
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String doEdit(@RequestBody String employee) {
+        String[] employeeInfo = employee.split("&");
+        List<Employee> list = HibernateUtils.selectByCondition(employeeInfo[0]);
+        Employee updatedEmployee = list.get(0);
+        updatedEmployee.setName(searchFor("name",employeeInfo));
+        updatedEmployee.setAccount(searchFor("account", employeeInfo));
+        updatedEmployee.setOnceOut(Boolean.parseBoolean(searchFor("onceOut",employeeInfo)));
+        updatedEmployee.setTimeInTW(Double.parseDouble(searchFor("timeInTW",employeeInfo)));
+        updatedEmployee.setGraduate(Boolean.parseBoolean(searchFor("graduate",employeeInfo)));
+        updatedEmployee.setTotalWorkYear(Double.parseDouble(searchFor("totalWorkYear",employeeInfo)));
+        updatedEmployee.setTimeToJoin(new Date());
+        updatedEmployee.setRate(Double.parseDouble(searchFor("rate",employeeInfo)));
+        updatedEmployee.setTimeOnThisAccount(Double.parseDouble(searchFor("timeOnThisAccount",employeeInfo)));
+        HibernateUtils.update(updatedEmployee);
+        return "index";
+    }
 
+    private String searchFor(String name, String[] employeeInfo) {
+        for(String str:employeeInfo){
+            if(str.startsWith(name)){
+                return str.split("=")[1].trim();
+            }
+        }
+        return null;
+    }
 }
