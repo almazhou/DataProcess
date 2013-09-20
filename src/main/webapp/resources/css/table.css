@@ -1,11 +1,11 @@
 body{
     font-family: Verdana,Geneva,Arial,sans-serif;
     font-size: small;
-    background: lightyellow;
 }
 h1,h2{
     font-weight: normal;
-    color: #cc6600;
+    color: black;
+    font-weight: bold;
     border-bottom: thin dotted #888888;
     text-align: center;
 }
@@ -34,5 +34,4 @@ caption{
     border: thin solid black;
 }
 .search{
-    float: right;
 }
