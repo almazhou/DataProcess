@@ -6,9 +6,9 @@ function showTable() {
             var employee = employees[i];
             var timeToJoin = (employee.timeToJoin);
             var date = new Date(parseInt(timeToJoin));
-            var editElement = "edit" + i.toString();
-            var deleteElement = "delete" + i.toString();
-            var saveElement = "save" + i.toString();
+            var editElement = "edit" + employee.id.toString();
+            var deleteElement = "delete" + employee.id.toString();
+            var saveElement = "save" + employee.id.toString();
             var employeeId = employee.id;
             var trk = $("<tr>" + "<td id ='ids'>" + employee.id + "</td>" + "<td>" + employee.name + "</td>" + "<td>" + employee.account + "</td>" + "<td>" + employee.timeOnThisAccount + "</td>" + "<td>" + employee.rate + "</td>" +
                 "<td>" + date + "</td>" + "<td>" + employee.totalWorkYear + "</td>" + "<td>" + employee.timeInTW + "</td>" + "<td>" + employee.graduate + "</td>" + "<td>" + employee.onceOut + "</td>" + "<td><button id =" + editElement + ">edit</button><button id =" + saveElement + ">Save</button><button id =" + deleteElement + ">Delete</button></td>" + "</tr>");
@@ -16,6 +16,7 @@ function showTable() {
             $("#" + editElement).bind('click', editSelectedElement);
             $("#" + deleteElement).bind('click', deleteSelectedElement);
             $("#" + saveElement).bind("click", saveSelectedElement);
+            $("#" + saveElement).hide();
         }
     });
     $("#searchBtn").bind("click",searchThings);
@@ -27,7 +28,10 @@ function searchThings(){
         type: 'POST',
         dataType: 'json',
         data:find,
-        contentType: 'application/json'
+        contentType: 'application/json',
+        error:function(){
+            location.reload();
+        }
     });
 
 }
@@ -35,6 +39,10 @@ function insert() {
     var form = $(".forms").show();
 }
 function editSelectedElement() {
+    var employeeId = $(this).parent().parent().find("#ids").text();
+    var saveElement = "#save" + employeeId.toString();
+    $(saveElement).show();
+    $(this).hide();
     var tds = $(this).parent().parent().find("td");
     for (var i = 1; i < tds.length - 1; i++) {
         var element = tds[i];
@@ -47,6 +55,9 @@ function editSelectedElement() {
 
 function saveSelectedElement() {
     var employeeId = $(this).parent().parent().find("#ids").text();
+    var editElement = "#edit" + employeeId.toString();
+    $(this).hide();
+    $(editElement).show();
     var tds = $(".tempEdit :input");
     var employeeInfo = [];
 //    employeeInfo.push(employeeId);
@@ -71,7 +82,10 @@ function saveSelectedElement() {
         type: 'POST',
         dataType: 'json',
         data:employee ,
-        contentType: 'application/json'
+        contentType: 'application/json',
+        error:function(){
+            location.reload();
+        }
     });
 }
 
@@ -82,6 +96,12 @@ function deleteSelectedElement() {
         type: 'POST',
         dataType: 'json',
         data: employeeId.toString(),
-        contentType: 'application/json'
+        contentType: 'application/json',
+        success:function(){
+            console.log("!!!!!!!!!!!!!!!");
+        },
+        error:function(data){
+         location.reload();
+        }
     });
 }
