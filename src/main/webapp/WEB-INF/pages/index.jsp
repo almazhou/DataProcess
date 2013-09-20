@@ -1,4 +1,4 @@
-<% response.addHeader("Refresh","20"); %>
+<% response.addHeader("Refresh","50"); %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -13,8 +13,9 @@
 <body onload="showTable()">
 <h1>Company Staff Information</h1>
 
-<div><span><button type="button" id="insert" onclick="insert()">Insert</button></span></div>
-
+<div>
+    <span class = "search"><button id = "searchBtn">Search</button> <input type="text" name="search"></span><button type="button" id="insert" onclick="insert()">Insert</button></span>
+</div>
 <table summary="This is the information about a company and it involves name, project <br> and the rate of somebody and their working years">
     <tr id="tableHead">
         <th>id</th>

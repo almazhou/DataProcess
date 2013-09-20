@@ -33,3 +33,6 @@ caption{
     padding-top: 20px;
     border: thin solid black;
 }
+.search{
+    float: right;
+}

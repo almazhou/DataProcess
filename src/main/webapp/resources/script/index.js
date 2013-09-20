@@ -18,8 +18,19 @@ function showTable() {
             $("#" + saveElement).bind("click", saveSelectedElement);
         }
     });
+    $("#searchBtn").bind("click",searchThings);
 }
+function searchThings(){
+    var find = $(this).parent().find("input").val();
+    $.ajax({
+        url: contextPath + "/search",
+        type: 'POST',
+        dataType: 'json',
+        data:find,
+        contentType: 'application/json'
+    });
 
+}
 function insert() {
     var form = $(".forms").show();
 }
