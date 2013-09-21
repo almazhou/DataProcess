@@ -30,22 +30,12 @@ public class JasonViewController {
         jsonView.getModel().put("employeeList", list);
         return jsonView;
     }
-
-    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    @RequestMapping(value = "/searchThis", method = RequestMethod.POST)
     public ModelAndView doSearch(@RequestBody String condition) {
-        ModelAndView jsonView = new ModelAndView("jsonView");
-        String[] split = condition.split("=");
-        List<Employee> list = null;
-        String att = split[1];
-        list = HibernateUtils.selectByCondition(condition);
-//        if (isNumeric(att)){
-//            list = HibernateUtils.selectByCondition(condition);
-//        }else{
-//            String conditionStr = split[0]+"=\'"+att+"\'";
-//            list = HibernateUtils.selectByCondition(conditionStr);
-//        }
-        jsonView.getModel().put("employeeList", list);
-        return jsonView;
+        ModelAndView search = new ModelAndView("jsonView");
+        List<Employee> list = HibernateUtils.selectByCondition(condition);
+        search.getModel().put("searchResult", list);
+        return search;
     }
 
     public static boolean isNumeric(String str) {

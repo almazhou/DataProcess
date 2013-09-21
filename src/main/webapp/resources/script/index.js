@@ -12,7 +12,7 @@ function showTable() {
             var employeeId = employee.id;
             var trk = $("<tr>" + "<td id ='ids'>" + employee.id + "</td>" + "<td>" + employee.name + "</td>" + "<td>" + employee.account + "</td>" + "<td>" + employee.timeOnThisAccount + "</td>" + "<td>" + employee.rate + "</td>" +
                 "<td>" + date + "</td>" + "<td>" + employee.totalWorkYear + "</td>" + "<td>" + employee.timeInTW + "</td>" + "<td>" + employee.graduate + "</td>" + "<td>" + employee.onceOut + "</td>" + "<td><button id =" + editElement + ">edit</button><button id =" + saveElement + ">Save</button><button id =" + deleteElement + ">Delete</button></td>" + "</tr>");
-            $("table").append(trk);
+            $("#allList").append(trk);
             $("#" + editElement).bind('click', editSelectedElement);
             $("#" + deleteElement).bind('click', deleteSelectedElement);
             $("#" + saveElement).bind("click", saveSelectedElement);
@@ -24,15 +24,34 @@ function showTable() {
 function searchThings(){
     var find = $(this).parent().find("input").val();
     $.ajax({
-        url: contextPath + "/search",
+        url: contextPath + "/searchThis",
         type: 'POST',
         dataType: 'json',
         data:find,
         contentType: 'application/json',
+        success:function(data){
+        showSearchResult(data);
+        },
         error:function(){
-            location.reload();
-        }
+        alert("Sorry,We cannot offer you the result");
+    }
     });
+
+}
+function showSearchResult(data){
+   var employees = data["searchResult"];
+   $(".addedResult").remove();
+    for (var i = 0; i < employees.length; i++) {
+        var employee = employees[i];
+        var timeToJoin = (employee.timeToJoin);
+        var date = new Date(parseInt(timeToJoin));
+        var trk = $("<tr>" + "<td>" + employee.id + "</td>" + "<td>" + employee.name + "</td>" + "<td>" + employee.account + "</td>" + "<td>" + employee.timeOnThisAccount + "</td>" + "<td>" + employee.rate + "</td>" +
+            "<td>" + date + "</td>" + "<td>" + employee.totalWorkYear + "</td>" + "<td>" + employee.timeInTW + "</td>" + "<td>" + employee.graduate + "</td>" + "<td>" + employee.onceOut + "</td>" +  "</tr>");
+        $(trk).addClass("addedResult");
+        $("#searchResult").append(trk);
+    }
+    $("#searchDiv").show();
+
 
 }
 function insert() {

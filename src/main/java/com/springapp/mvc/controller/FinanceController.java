@@ -67,6 +67,7 @@ public class FinanceController {
         return "index";
     }
 
+
     private String searchFor(String name, String[] employeeInfo) {
         for(String str:employeeInfo){
             if(str.startsWith(name)){
@@ -75,6 +76,5 @@ public class FinanceController {
         }
         return null;
     }
-
 
 }

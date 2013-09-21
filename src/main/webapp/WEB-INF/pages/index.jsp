@@ -15,7 +15,7 @@
 <div>
     <span class = "search"><button id = "searchBtn">Search</button> <input type="text" name="search"></span><button type="button" id="insert" onclick="insert()">Insert</button></span>
 </div>
-<table summary="This is the information about a company and it involves name, project <br> and the rate of somebody and their working years">
+<table id = "allList" summary="This is the information about a company and it involves name, project <br> and the rate of somebody and their working years">
     <tr id="tableHead">
         <th>id</th>
         <th>name</th>
@@ -51,6 +51,8 @@
     </tr>
 
 </table>
-
+<div id = "searchResult">
+    <jsp:include page="search.jsp"></jsp:include>
+</div>
 </body>
 </html>
