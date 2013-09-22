@@ -18,35 +18,75 @@ function showTable() {
             $("#" + saveElement).bind("click", saveSelectedElement);
             $("#" + saveElement).hide();
         }
+        $("#calDate").datepicker();
     });
-    $("#searchBtn").bind("click",searchThings);
+    $("#searchBtn").bind("click", searchThings);
 }
-function searchThings(){
+function submitForm() {
+    var inputs = $("#insertForms input");
+    var flag = true;
+    for (var i = 0; i < inputs.length; i++) {
+        var input = inputs[i];
+        var value = $(input).val();
+        if (value.trim().length === 0) {
+            flag = flag && false;
+        } else {
+            flag = flag && checkFormat(input);
+        }
+    }
+    if (!flag) {
+        alert("invalid input");
+    }
+    return flag;
+}
+function checkFormat(input) {
+    var inputStr = $(input).val().toLowerCase();
+    var name = input.name.toLowerCase();
+    if (name === "id") {
+        return !isNaN(inputStr) && inputStr * 1 % 1 === 0;
+
+    } else if (name === "graduate" || name === "onceOut".toLowerCase()) {
+        if (inputStr === "yes" || inputStr === "true" || inputStr === "no" || inputStr === "false") {
+            return true;
+        }
+        console.log("stop" + inputStr);
+        return false;
+    } else if (name === "name" || name === "account" || name === "timeToJoin".toLowerCase()) {
+        return true;
+    } else {
+        if (!isNaN(inputStr)) {
+            return true;
+        }
+        console.log(inputStr);
+        return false;
+    }
+}
+function searchThings() {
     var find = $(this).parent().find("input").val();
     $.ajax({
         url: contextPath + "/searchThis",
         type: 'POST',
         dataType: 'json',
-        data:find,
+        data: find,
         contentType: 'application/json',
-        success:function(data){
-        showSearchResult(data);
+        success: function (data) {
+            showSearchResult(data);
         },
-        error:function(){
-        alert("Sorry,We cannot offer you the result");
-    }
+        error: function () {
+            alert("Sorry,We cannot offer you the result");
+        }
     });
 
 }
-function showSearchResult(data){
-   var employees = data["searchResult"];
-   $(".addedResult").remove();
+function showSearchResult(data) {
+    var employees = data["searchResult"];
+    $(".addedResult").remove();
     for (var i = 0; i < employees.length; i++) {
         var employee = employees[i];
         var timeToJoin = (employee.timeToJoin);
         var date = new Date(parseInt(timeToJoin));
         var trk = $("<tr>" + "<td>" + employee.id + "</td>" + "<td>" + employee.name + "</td>" + "<td>" + employee.account + "</td>" + "<td>" + employee.timeOnThisAccount + "</td>" + "<td>" + employee.rate + "</td>" +
-            "<td>" + date + "</td>" + "<td>" + employee.totalWorkYear + "</td>" + "<td>" + employee.timeInTW + "</td>" + "<td>" + employee.graduate + "</td>" + "<td>" + employee.onceOut + "</td>" +  "</tr>");
+            "<td>" + date + "</td>" + "<td>" + employee.totalWorkYear + "</td>" + "<td>" + employee.timeInTW + "</td>" + "<td>" + employee.graduate + "</td>" + "<td>" + employee.onceOut + "</td>" + "</tr>");
         $(trk).addClass("addedResult");
         $("#searchResult").append(trk);
     }
@@ -67,7 +107,12 @@ function editSelectedElement() {
         var element = tds[i];
         var OriginalContent = $(element).text();
         $(element).addClass("tempEdit");
-        $(element).html("<input type='text' value='" + OriginalContent + "' />");
+        if (i === 5) {
+            $(element).html("<input type='text' class='editCal' value='" + OriginalContent + "' />");
+            $(".editCal").datepicker();
+        } else {
+            $(element).html("<input type='text' value='" + OriginalContent + "' />");
+        }
     }
 
 }
@@ -80,29 +125,29 @@ function saveSelectedElement() {
     var tds = $(".tempEdit :input");
     var employeeInfo = [];
 //    employeeInfo.push(employeeId);
-    for (var i = 0; i < tds.length ; i++) {
+    for (var i = 0; i < tds.length; i++) {
         var element = tds[i];
         employeeInfo.push($(element).val());
     }
     var employee = {
-        id: employeeId*1,
+        id: employeeId * 1,
         name: employeeInfo[0],
         account: employeeInfo[1],
-        timeOnThisAccount: employeeInfo[2]*1,
-        rate: employeeInfo[3]*1,
+        timeOnThisAccount: employeeInfo[2] * 1,
+        rate: employeeInfo[3] * 1,
         timeToJoin: new Date(employeeInfo[4]),
-        totalWorkYear: employeeInfo[5]*1,
-        timeInTW: employeeInfo[6]*1,
-        graduate:Boolean(employeeInfo[7]),
-        onceOut:Boolean(employeeInfo[8])
+        totalWorkYear: employeeInfo[5] * 1,
+        timeInTW: employeeInfo[6] * 1,
+        graduate: Boolean(employeeInfo[7]),
+        onceOut: Boolean(employeeInfo[8])
     };
     $.ajax({
         url: contextPath + "/edit",
         type: 'POST',
         dataType: 'json',
-        data:employee ,
+        data: employee,
         contentType: 'application/json',
-        error:function(){
+        error: function () {
             location.reload();
         }
     });
@@ -116,11 +161,11 @@ function deleteSelectedElement() {
         dataType: 'json',
         data: employeeId.toString(),
         contentType: 'application/json',
-        success:function(){
+        success: function () {
             console.log("!!!!!!!!!!!!!!!");
         },
-        error:function(data){
-         location.reload();
+        error: function (data) {
+            location.reload();
         }
     });
 }

@@ -33,5 +33,25 @@ caption{
     padding-top: 20px;
     border: thin solid black;
 }
-.search{
+
+.addedResult{
+    margin-left: 20px;
+    border: thin dotted grey;
+    padding: 5px;
+    color: black;
+    width: 300px;
+    height: 40px;
+}
+#insert,#searchBtn{
+  width: 50px;
+  height: 25px;
+  border-style: dotted;
+
+}
+#searchBtn{
+    margin-left: 50px;
+}
+#insert{
+    float: right;
+    margin-right: 50px;
 }

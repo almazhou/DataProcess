@@ -13,7 +13,6 @@
         <th>Time in TW</th>
         <th>Graduate</th>
         <th>Once Went Abroad</th>
-        <th>edit</th>
     </tr>
 
     </table>

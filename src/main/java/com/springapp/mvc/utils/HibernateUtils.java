@@ -132,6 +132,7 @@ public class HibernateUtils {
         Session session = sf.openSession();
 
         String hql = "FROM Employee E where E." + condition.trim();
+
         List list = session.createQuery(hql).list();
         session.close();
 
