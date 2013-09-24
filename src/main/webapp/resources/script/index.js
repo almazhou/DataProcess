@@ -1,17 +1,17 @@
-function showTable() {
+function initialise() {
     $.getJSON(contextPath + "/json/employeeList", function (data) {
         var employees = [];
         employees = data["employeeList"];
         for (var i = 0; i < employees.length; i++) {
             var employee = employees[i];
-            var timeToJoin = (employee.timeToJoin);
-            var date = new Date(parseInt(timeToJoin));
+            var date = new Date(parseInt(employee.timeToJoin));
+            var timeToJoin = parseSpecificDate(date);
             var editElement = "edit" + employee.id.toString();
             var deleteElement = "delete" + employee.id.toString();
             var saveElement = "save" + employee.id.toString();
             var employeeId = employee.id;
             var trk = $("<tr>" + "<td id ='ids'>" + employee.id + "</td>" + "<td>" + employee.name + "</td>" + "<td>" + employee.account + "</td>" + "<td>" + employee.timeOnThisAccount + "</td>" + "<td>" + employee.rate + "</td>" +
-                "<td>" + date + "</td>" + "<td>" + employee.totalWorkYear + "</td>" + "<td>" + employee.timeInTW + "</td>" + "<td>" + employee.graduate + "</td>" + "<td>" + employee.onceOut + "</td>" + "<td><button id =" + editElement + ">edit</button><button id =" + saveElement + ">Save</button><button id =" + deleteElement + ">Delete</button></td>" + "</tr>");
+                "<td>" + timeToJoin + "</td>" + "<td>" + employee.totalWorkYear + "</td>" + "<td>" + employee.timeInTW + "</td>" + "<td>" + employee.graduate + "</td>" + "<td>" + employee.onceOut + "</td>" + "<td><button id =" + editElement + ">edit</button><button id =" + saveElement + ">Save</button><button id =" + deleteElement + ">Delete</button></td>" + "</tr>");
             $("#allList").append(trk);
             $("#" + editElement).bind('click', editSelectedElement);
             $("#" + deleteElement).bind('click', deleteSelectedElement);
@@ -21,6 +21,14 @@ function showTable() {
         $("#calDate").datepicker();
     });
     $("#searchBtn").bind("click", searchThings);
+}
+function parseSpecificDate(date){
+  var dateStr = padStr(1+date.getMonth())+"/"+padStr(1+date.getDay())+"/"+ padStr(date.getFullYear());
+  return dateStr;
+}
+
+function padStr(i){
+    return (i < 10) ? "0" + i : "" + i;
 }
 function submitForm() {
     var inputs = $("#insertForms input");
@@ -124,7 +132,6 @@ function saveSelectedElement() {
     $(editElement).show();
     var tds = $(".tempEdit :input");
     var employeeInfo = [];
-//    employeeInfo.push(employeeId);
     for (var i = 0; i < tds.length; i++) {
         var element = tds[i];
         employeeInfo.push($(element).val());

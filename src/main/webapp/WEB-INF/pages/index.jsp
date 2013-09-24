@@ -7,19 +7,31 @@
     <script>contextPath = "<%=request.getContextPath()%>"</script>
     <link type="text/css" rel="stylesheet" media="screen,projection"
           href="<%= request.getContextPath()%>/resources/css/table.css"/>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/bootstrap/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/bootstrap/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <script src="<%=request.getContextPath()%>/resources/script/index.js"></script>
+    <script src="<%=request.getContextPath()%>/resources/bootstrap/js/bootstrap.js"></script>
+    <script src="<%=request.getContextPath()%>/resources/bootstrap/js/bootstrap.min.js"></script>
 </head>
-<body onload="showTable()">
+<body onload="initialise()">
 <h1>Company Staff Information</h1>
 
 <div>
-    <span class = "search"><button id = "searchBtn">Search</button> <input type="text" name="search"></span>
-    <button type="button" id="insert" onclick="insert()">Insert</button></span>
 </div>
-<table id = "allList" summary="This is the information about a company and it involves name, project <br> and the rate of somebody and their working years">
+<div class="btn-group nav navs">
+    <button type="button" id="insert" class="btn btn-info" onclick="insert()">Insert</button>
+    <button id = "searchBtn" class="btn btn-info">Search</button>
+</div>
+<span>
+    <input type="text" name="search" class="input-medium search-query">
+</span>
+<table id = "allList" class="table .table-striped" summary="This is the information about a company and it involves name, project <br> and the rate of somebody and their working years">
     <tr id="tableHead">
         <th>id</th>
         <th>name</th>

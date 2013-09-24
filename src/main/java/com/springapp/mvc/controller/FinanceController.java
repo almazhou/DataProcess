@@ -1,6 +1,7 @@
 package com.springapp.mvc.controller;
 
 import com.springapp.mvc.domain.Employee;
+import com.springapp.mvc.utils.DateUtils;
 import com.springapp.mvc.utils.HibernateUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,13 +32,21 @@ public class FinanceController {
         double rate0 = Double.parseDouble(rate);
         double totalWorkYear0 = Double.parseDouble(totalWorkYear);
         double timeInTW0 = Double.parseDouble(timeInTW);
-        boolean graduate0 = Boolean.parseBoolean(graduate);
-        boolean onceOut0 = Boolean.parseBoolean(onceOut);
+        boolean graduate0 = parseBoolean(graduate);
+        boolean onceOut0 = parseBoolean(onceOut);
+        Date dateWithFormat = DateUtils.createDateWithFormat(timeToJoin, "MM/dd/yyyy");
         double timeOnThisAccount0 = Double.parseDouble(timeOnThisAccount);
 
-        Employee employee = new Employee(id0, account, name, rate0, timeInTW0, new Date(), timeOnThisAccount0, totalWorkYear0, graduate0, onceOut0);
+        Employee employee = new Employee(id0, account, name, rate0, timeInTW0, dateWithFormat, timeOnThisAccount0, totalWorkYear0, graduate0, onceOut0);
         HibernateUtils.save(employee);
         return "index";
+    }
+
+    private boolean parseBoolean(String value) {
+        if(value.equalsIgnoreCase("yes")){
+            value = "true";
+        }
+        return Boolean.parseBoolean(value);
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
