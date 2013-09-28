@@ -70,7 +70,7 @@ function checkFormat(input) {
     }
 }
 function searchThings() {
-    var find = $(this).parent().find("input").val();
+    var find = $("input[name='search']").val();
     $.ajax({
         url: contextPath + "/searchThis",
         type: 'POST',
