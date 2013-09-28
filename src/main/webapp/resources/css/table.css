@@ -42,3 +42,6 @@ div .navs{
     margin-left: auto;
     margin-right: auto;
 }
+.hideSelect{
+    display: none;
+}

@@ -1,4 +1,5 @@
 function initialise() {
+    addSelectForEveryColumn();
     $.getJSON(contextPath + "/json/employeeList", function (data) {
         var employees = [];
         employees = data["employeeList"];
@@ -10,17 +11,63 @@ function initialise() {
             var deleteElement = "delete" + employee.id.toString();
             var saveElement = "save" + employee.id.toString();
             var employeeId = employee.id;
-            var trk = $("<tr>" + "<td id ='ids'>" + employee.id + "</td>" + "<td>" + employee.name + "</td>" + "<td>" + employee.account + "</td>" + "<td>" + employee.timeOnThisAccount + "</td>" + "<td>" + employee.rate + "</td>" +
-                "<td>" + timeToJoin + "</td>" + "<td>" + employee.totalWorkYear + "</td>" + "<td>" + employee.timeInTW + "</td>" + "<td>" + employee.graduate + "</td>" + "<td>" + employee.onceOut + "</td>" + "<td><button id =" + editElement + ">edit</button><button id =" + saveElement + ">Save</button><button id =" + deleteElement + ">Delete</button></td>" + "</tr>");
+            var trk = $("<tr>" + "<td id ='ids' class='idClass'>" + employee.id + "</td>" + "<td class='nameClass'>" + employee.name + "</td>" + "<td class='accountClass'>" + employee.account + "</td>" + "<td class='timeOnThisAccountClass'>" + employee.timeOnThisAccount + "</td>" + "<td class='rateClass'>" + employee.rate + "</td>" +
+                "<td class='timeToJoinClass'>" + timeToJoin + "</td>" + "<td class='totalWorkYearClass'>" + employee.totalWorkYear + "</td>" + "<td class='timeInTWClass'>" + employee.timeInTW + "</td>" + "<td class='graduateClass'>" + employee.graduate + "</td>" + "<td class='onceOutClass'>" + employee.onceOut + "</td>" + "<td><button id =" + editElement + ">edit</button><button id =" + saveElement + ">Save</button><button id =" + deleteElement + ">Delete</button></td>" + "</tr>");
             $("#allList").append(trk);
             $("#" + editElement).bind('click', editSelectedElement);
             $("#" + deleteElement).bind('click', deleteSelectedElement);
             $("#" + saveElement).bind("click", saveSelectedElement);
             $("#" + saveElement).hide();
+            buildOptions(trk);
         }
+
         $("#calDate").datepicker();
     });
     $("#searchBtn").bind("click", searchThings);
+}
+function buildOptions(tableElement){
+  var tableEntries = $(tableElement).find("td[class]");
+    $(tableEntries).each(function(){
+        var selectName = $(this).attr("class");
+        var tableContent = $(this).text();
+        var option = $("<option></option>").attr("value",selectName).text(tableContent);
+        console.log(selectName);
+        var appendSelect = selectName.substring(0,selectName.length-5);
+        var select = $("select[name="+appendSelect+"]");
+        if(selectHasText(select,tableContent)){
+            $(select).append(option);
+        }
+    });
+}
+function selectHasText(select,content){
+    var options = $(select).find("option");
+    var flag = true;
+    $(options).each(function(){
+        if($(this).text()===content){
+           flag = false;
+        }
+    });
+    return flag;
+}
+function addSelectForEveryColumn(){
+    var heads = $("#tableHead th[id !='edit']");
+
+    $(heads).each(function(head){
+        if($(this).find("div").hasClass("selectDivClass")){
+            $(".selectDivClass").remove();
+        }
+        var selectName = $(this).attr("id");
+        var addedSelect=$("<select></select>").attr("name",selectName);
+        var selectDiv = $("<div></div>").addClass("selectDivClass");
+        var selectDiv = $("<div></div>").addClass("hideSelect");
+        $(selectDiv).append(addedSelect);
+        $(this).append(selectDiv);
+
+    });
+}
+
+function searchMultiple(){
+
 }
 function parseSpecificDate(date){
   var dateStr = padStr(1+date.getMonth())+"/"+padStr(1+date.getDay())+"/"+ padStr(date.getFullYear());

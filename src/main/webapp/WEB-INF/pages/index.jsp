@@ -26,24 +26,25 @@
 </div>
 <div class="btn-group nav navs">
     <button type="button" id="insert" class="btn btn-info" onclick="insert()">Insert</button>
-    <button id = "searchBtn" class="btn btn-info">Search</button>
+    <button type="button" id="match" class="btn btn-info" onclick="searchMultiple()">Match</button>
 </div>
 <span>
     <input type="text" name="search" class="input-medium search-query">
+    <button id = "searchBtn" class="btn btn-info">Search</button>
 </span>
 <table id = "allList" class="table .table-striped" summary="This is the information about a company and it involves name, project <br> and the rate of somebody and their working years">
     <tr id="tableHead">
-        <th>id</th>
-        <th>name</th>
-        <th>Account</th>
-        <th>Time on this account</th>
-        <th>Rate</th>
-        <th>Time to Join</th>
-        <th>Total work year</th>
-        <th>Time in TW</th>
-        <th>Graduate</th>
-        <th>Once Went Abroad</th>
-        <th>edit</th>
+        <th id ="id"><div>id</div></th>
+        <th id = "name"><div>name</div></th>
+        <th id ="account"><div>Account</div></th>
+        <th id = "timeOnThisAccount"><div>Time on this account</div></th>
+        <th id = "rate"><div>Rate</div></th>
+        <th id = "timeToJoin"><div>Time to Join</div></th>
+        <th id = "totalWorkYear"><div>Total work year</div></th>
+        <th id = "timeInTW"><div>Time in TW</div></th>
+        <th id = "graduate"><div>Graduate</div></th>
+        <th id = "onceOut"><div>Once Went Abroad</div></th>
+        <th id = "edit">edit</th>
     </tr>
 
     <tr id="insertForms" class="forms" style="display: none">
