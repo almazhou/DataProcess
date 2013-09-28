@@ -34,16 +34,16 @@
 </span>
 <table id = "allList" class="table .table-striped" summary="This is the information about a company and it involves name, project <br> and the rate of somebody and their working years">
     <tr id="tableHead">
-        <th id ="id"><div>id</div></th>
-        <th id = "name"><div>name</div></th>
-        <th id ="account"><div>Account</div></th>
-        <th id = "timeOnThisAccount"><div>Time on this account</div></th>
-        <th id = "rate"><div>Rate</div></th>
-        <th id = "timeToJoin"><div>Time to Join</div></th>
-        <th id = "totalWorkYear"><div>Total work year</div></th>
-        <th id = "timeInTW"><div>Time in TW</div></th>
-        <th id = "graduate"><div>Graduate</div></th>
-        <th id = "onceOut"><div>Once Went Abroad</div></th>
+        <th id ="id"><div class="title">id</div></th>
+        <th id = "name"><div class="title">name</div></th>
+        <th id ="account"><div class="title">Account</div></th>
+        <th id = "timeOnThisAccount"><div class="title">Time on this account</div></th>
+        <th id = "rate"><div class="title">Rate</div></th>
+        <th id = "timeToJoin"><div class="title">Time to Join</div></th>
+        <th id = "totalWorkYear"><div class="title">Total work year</div></th>
+        <th id = "timeInTW"><div class="title">Time in TW</div></th>
+        <th id = "graduate"><div class="title">Graduate</div></th>
+        <th id = "onceOut"><div class="title">Once Went Abroad</div></th>
         <th id = "edit">edit</th>
     </tr>
 

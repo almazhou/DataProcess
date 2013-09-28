@@ -57,9 +57,14 @@ function addSelectForEveryColumn(){
             $(".selectDivClass").remove();
         }
         var selectName = $(this).attr("id");
+        var searchBtn = $("<button>search</button>").attr("id",selectName+"Search");
+        $(searchBtn).bind('click',function(){
+            $(this).parent().parent().find("select").removeClass("hideSelect");
+        });
+        $(this).find(".title").append(searchBtn);
         var addedSelect=$("<select></select>").attr("name",selectName);
+        $(addedSelect).addClass("hideSelect");
         var selectDiv = $("<div></div>").addClass("selectDivClass");
-        var selectDiv = $("<div></div>").addClass("hideSelect");
         $(selectDiv).append(addedSelect);
         $(this).append(selectDiv);
 

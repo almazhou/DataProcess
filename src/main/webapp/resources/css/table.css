@@ -45,3 +45,6 @@ div .navs{
 .hideSelect{
     display: none;
 }
+.searchColumn{
+  display: none;
+}
