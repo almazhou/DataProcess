@@ -34,12 +34,25 @@ function buildOptions(tableElement){
         console.log(selectName);
         var appendSelect = selectName.substring(0,selectName.length-5);
         var select = $("select[name="+appendSelect+"]");
-        if(selectHasText(select,tableContent)){
+        if(selectNotContains(select,tableContent)){
             $(select).append(option);
         }
+        var element = select;
+        $(element).unbind("change");
+        $(element).change(function(element){
+            var selectedItem = $(element.target).find("option:selected");
+            var id = $(selectedItem).val();
+            var showElements = $("." + id);
+            $(showElements).each(function(){
+                if($(this).text()!==$(selectedItem).text()){
+                    $(this).parent().hide();
+                }
+            });
+
+        });
     });
 }
-function selectHasText(select,content){
+function selectNotContains(select,content){
     var options = $(select).find("option");
     var flag = true;
     $(options).each(function(){
@@ -68,11 +81,13 @@ function addSelectForEveryColumn(){
         $(selectDiv).append(addedSelect);
         $(this).append(selectDiv);
 
+
     });
 }
 
 function searchMultiple(){
-
+     var checkedValues = $("select:visible option:selected");
+    console.log(checkedValues);
 }
 function parseSpecificDate(date){
   var dateStr = padStr(1+date.getMonth())+"/"+padStr(1+date.getDay())+"/"+ padStr(date.getFullYear());
