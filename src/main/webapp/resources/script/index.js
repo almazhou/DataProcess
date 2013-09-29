@@ -31,7 +31,6 @@ function buildOptions(tableElement){
         var selectName = $(this).attr("class");
         var tableContent = $(this).text();
         var option = $("<option></option>").attr("value",selectName).text(tableContent);
-        console.log(selectName);
         var appendSelect = selectName.substring(0,selectName.length-5);
         var select = $("select[name="+appendSelect+"]");
         if(selectNotContains(select,tableContent)){
@@ -78,7 +77,9 @@ function addSelectForEveryColumn(){
             $(this).parent().parent().find("select").removeClass("hideSelect");
         });
         $(this).find(".title").append(searchBtn);
+        var option = $("<option></option>").attr("value",selectName).text("--");
         var addedSelect=$("<select></select>").attr("name",selectName);
+        addedSelect.append(option);
         $(addedSelect).addClass("hideSelect");
         var selectDiv = $("<div></div>").addClass("selectDivClass");
         $(selectDiv).append(addedSelect);
