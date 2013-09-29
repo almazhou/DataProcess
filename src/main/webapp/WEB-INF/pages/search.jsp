@@ -1,7 +1,7 @@
 
 <div id ="searchDiv"  style="display: none">
 <h1>Search Result</h1>
-<table id = "searchResult">
+<table id = "searchResult" class="table .table-striped">
     <tr>
         <th>id</th>
         <th>name</th>

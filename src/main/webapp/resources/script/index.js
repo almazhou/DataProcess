@@ -43,8 +43,11 @@ function buildOptions(tableElement){
             var selectedItem = $(element.target).find("option:selected");
             var id = $(selectedItem).val();
             var showElements = $("." + id);
+            $(showElements).parent().hide();
             $(showElements).each(function(){
-                if($(this).text()!==$(selectedItem).text()){
+                if($(this).text()===$(selectedItem).text()){
+                    $(this).parent().show();
+                }else{
                     $(this).parent().hide();
                 }
             });
@@ -70,7 +73,7 @@ function addSelectForEveryColumn(){
             $(".selectDivClass").remove();
         }
         var selectName = $(this).attr("id");
-        var searchBtn = $("<button>search</button>").attr("id",selectName+"Search");
+        var searchBtn = $("<button>filter</button>").attr("id",selectName+"Search");
         $(searchBtn).bind('click',function(){
             $(this).parent().parent().find("select").removeClass("hideSelect");
         });
@@ -158,10 +161,10 @@ function showSearchResult(data) {
     $(".addedResult").remove();
     for (var i = 0; i < employees.length; i++) {
         var employee = employees[i];
-        var timeToJoin = (employee.timeToJoin);
-        var date = new Date(parseInt(timeToJoin));
+        var date = new Date(parseInt(employee.timeToJoin));
+        var timeToJoin = parseSpecificDate(date);
         var trk = $("<tr>" + "<td>" + employee.id + "</td>" + "<td>" + employee.name + "</td>" + "<td>" + employee.account + "</td>" + "<td>" + employee.timeOnThisAccount + "</td>" + "<td>" + employee.rate + "</td>" +
-            "<td>" + date + "</td>" + "<td>" + employee.totalWorkYear + "</td>" + "<td>" + employee.timeInTW + "</td>" + "<td>" + employee.graduate + "</td>" + "<td>" + employee.onceOut + "</td>" + "</tr>");
+            "<td>" + timeToJoin + "</td>" + "<td>" + employee.totalWorkYear + "</td>" + "<td>" + employee.timeInTW + "</td>" + "<td>" + employee.graduate + "</td>" + "<td>" + employee.onceOut + "</td>" + "</tr>");
         $(trk).addClass("addedResult");
         $("#searchResult").append(trk);
     }
