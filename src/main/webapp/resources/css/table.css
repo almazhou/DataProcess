@@ -51,3 +51,6 @@ div .navs{
 .hideFilter{
     display: none;
 }
+.hideSort{
+    display: none;
+}

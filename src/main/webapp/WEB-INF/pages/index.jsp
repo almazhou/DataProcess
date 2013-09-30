@@ -27,6 +27,7 @@
 <div class="btn-group nav navs">
     <button type="button" id="insert" class="btn btn-info"  onclick="insert()">Insert</button>
     <button type="button" id="filterBtn" class="btn btn-info"  onclick="filter()">filter</button>
+    <button type="button" id="sortBtn" class="btn btn-info"  onclick="sortTable()">sort</button>
 </div>
 <span style="float: right;">
     <input type="text" name="search" class="input-medium search-query">

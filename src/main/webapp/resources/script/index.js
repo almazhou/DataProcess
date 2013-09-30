@@ -1,7 +1,7 @@
 var orderedItem =["idClass","nameClass","accountClass","timeOnThisAccountClass","rateClass","timeToJoinClass","totalWorkYearClass","timeInTWClass","graduateClass","onceOutClass"];
 
 function initialise() {
-    addSelectForEveryColumn();
+    initialButtons();
     $.getJSON(contextPath + "/json/employeeList", function (data) {
         employees = data["employeeList"];
         for (var i = 0; i < employees.length; i++) {
@@ -25,6 +25,7 @@ function initialise() {
     });
     $("#searchBtn").bind("click", searchThings);
 }
+
 function buildOptions(tableElement){
   var tableEntries = $(tableElement).find("td[class]");
     $(tableEntries).each(function(){
@@ -53,6 +54,15 @@ function showOrHide(selected,showColumn){
             $(this).parent().show();
         }
     });
+    }
+}
+function sortTable(){
+    var sorters = $("button[id$='Sort']");
+
+    if(sorters.hasClass("hideSort")){
+        sorters.removeClass("hideSort");
+    }else{
+        sorters.addClass("hideSort");
     }
 }
 function renderItems(){
@@ -85,7 +95,7 @@ function selectNotContains(select,content){
     });
     return flag;
 }
-function addSelectForEveryColumn(){
+function initialButtons(){
     var heads = $("#tableHead th[id !='edit']");
 
     $(heads).each(function(head){
@@ -93,22 +103,53 @@ function addSelectForEveryColumn(){
             $(".selectDivClass").remove();
         }
         var selectName = $(this).attr("id");
-        var searchBtn = $("<button>filter</button>").attr("id",selectName+"Filter").addClass("hideFilter");
-        $(searchBtn).bind('click',function(){
-            $(this).parent().parent().find("select").removeClass("hideSelect");
+        var filterBtn = $("<button>filter</button>").attr("id",selectName+"Filter").addClass("hideFilter");
+        $(filterBtn).bind('click',function(){
+            var select = $(this).parent().parent().find("select[name$='Filter']");
+            if($(select).hasClass("hideSelect")){
+               $(select).removeClass("hideSelect");
+            }else{
+                $(select).addClass("hideSelect");
+            }
         });
-        $(this).find(".title").append(searchBtn);
+        $(this).find(".title").append(filterBtn);
         var option = $("<option></option>").attr("value",selectName+"Class").text("--");
-        var addedSelect=$("<select></select>").attr("name",selectName);
+        var addedSelect=$("<select></select>").attr("name",selectName+"Filter");
         addedSelect.append(option);
         $(addedSelect).addClass("hideSelect");
         var selectDiv = $("<div></div>").addClass("selectDivClass");
         $(selectDiv).append(addedSelect);
         $(this).append(selectDiv);
+        var sortBtn = $("<button>sort</button>").attr("id",selectName+"Sort").addClass("hideSort");
+        $(sortBtn).bind("click",function(){
+            var tempSort = $(this).parent().parent().find("select[name$='Sort']");
+            if($(tempSort).hasClass("hideSelect")){
+                $(tempSort).removeClass("hideSelect");
+            }else{
+                $(tempSort).addClass("hideSelect");
+            }
+        })
+        $(this).find(".title").append(sortBtn);
+
+        var nonSelect = $("<option></option>").attr("value","none").text("--");
+        var increase = $("<option></option>").attr("value","increase").text("up");
+        var decrease = $("<option></option>").attr("value","decrease").text("down");
+        var sortSelect=$("<select></select>").attr("name",selectName+"Sort");
+        $(sortSelect).append(nonSelect);
+        $(sortSelect).append(increase);
+        $(sortSelect).append(decrease);
+        $(sortSelect).addClass("hideSelect");
+
+
+
+        var sortDiv = $("<div></div>").addClass("sortDivClass");
+        $(sortDiv).append(sortSelect);
+        $(this).append(sortDiv);
 
 
     });
 }
+
 
 function filter(){
    var filters = $("button[id$='Filter']");
