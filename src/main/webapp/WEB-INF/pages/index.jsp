@@ -25,10 +25,10 @@
 <div>
 </div>
 <div class="btn-group nav navs">
-    <button type="button" id="insert" class="btn btn-info" onclick="insert()">Insert</button>
-    <button type="button" id="match" class="btn btn-info" onclick="searchMultiple()">Match</button>
+    <button type="button" id="insert" class="btn btn-info"  onclick="insert()">Insert</button>
+    <button type="button" id="filterBtn" class="btn btn-info"  onclick="filter()">filter</button>
 </div>
-<span>
+<span style="float: right;">
     <input type="text" name="search" class="input-medium search-query">
     <button id = "searchBtn" class="btn btn-info">Search</button>
 </span>
@@ -48,7 +48,7 @@
     </tr>
 
     <tr id="insertForms" class="forms" style="display: none">
-        <form action="<%=request.getContextPath()%>/saveForm" method="POST">
+        <form id = "insertForm" action="<%=request.getContextPath()%>/saveForm" method="POST">
             <td>
                 <input type="text" name="id" placeholder="0">
             </td>

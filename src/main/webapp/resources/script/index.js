@@ -93,7 +93,7 @@ function addSelectForEveryColumn(){
             $(".selectDivClass").remove();
         }
         var selectName = $(this).attr("id");
-        var searchBtn = $("<button>filter</button>").attr("id",selectName+"Search");
+        var searchBtn = $("<button>filter</button>").attr("id",selectName+"Filter").addClass("hideFilter");
         $(searchBtn).bind('click',function(){
             $(this).parent().parent().find("select").removeClass("hideSelect");
         });
@@ -110,9 +110,15 @@ function addSelectForEveryColumn(){
     });
 }
 
-function searchMultiple(){
-     var checkedValues = $("select:visible option:selected");
-    console.log(checkedValues);
+function filter(){
+   var filters = $("button[id$='Filter']");
+
+    if(filters.hasClass("hideFilter")){
+        filters.removeClass("hideFilter");
+    }else{
+        filters.addClass("hideFilter");
+    }
+
 }
 function parseSpecificDate(date){
   var dateStr = padStr(1+date.getMonth())+"/"+padStr(1+date.getDay())+"/"+ padStr(date.getFullYear());
@@ -195,7 +201,16 @@ function showSearchResult(data) {
 
 }
 function insert() {
-    var form = $(".forms").show();
+    var forms = $(".forms");
+    if($(forms).is(":visible")){
+        forms.hide();
+    }else{
+        clearForm();
+        forms.show();
+    }
+}
+function clearForm(){
+   $("#insertForm")[0].reset();
 }
 function editSelectedElement() {
     var employeeId = $(this).parent().parent().find("#ids").text();

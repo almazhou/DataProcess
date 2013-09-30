@@ -48,3 +48,6 @@ div .navs{
 .searchColumn{
   display: none;
 }
+.hideFilter{
+    display: none;
+}
