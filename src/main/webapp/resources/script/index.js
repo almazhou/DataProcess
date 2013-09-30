@@ -1,7 +1,8 @@
+var orderedItem =["idClass","nameClass","accountClass","timeOnThisAccountClass","rateClass","timeToJoinClass","totalWorkYearClass","timeInTWClass","graduateClass","onceOutClass"];
+
 function initialise() {
     addSelectForEveryColumn();
     $.getJSON(contextPath + "/json/employeeList", function (data) {
-        var employees = [];
         employees = data["employeeList"];
         for (var i = 0; i < employees.length; i++) {
             var employee = employees[i];
@@ -10,7 +11,6 @@ function initialise() {
             var editElement = "edit" + employee.id.toString();
             var deleteElement = "delete" + employee.id.toString();
             var saveElement = "save" + employee.id.toString();
-            var employeeId = employee.id;
             var trk = $("<tr>" + "<td id ='ids' class='idClass'>" + employee.id + "</td>" + "<td class='nameClass'>" + employee.name + "</td>" + "<td class='accountClass'>" + employee.account + "</td>" + "<td class='timeOnThisAccountClass'>" + employee.timeOnThisAccount + "</td>" + "<td class='rateClass'>" + employee.rate + "</td>" +
                 "<td class='timeToJoinClass'>" + timeToJoin + "</td>" + "<td class='totalWorkYearClass'>" + employee.totalWorkYear + "</td>" + "<td class='timeInTWClass'>" + employee.timeInTW + "</td>" + "<td class='graduateClass'>" + employee.graduate + "</td>" + "<td class='onceOutClass'>" + employee.onceOut + "</td>" + "<td><button id =" + editElement + ">edit</button><button id =" + saveElement + ">Save</button><button id =" + deleteElement + ">Delete</button></td>" + "</tr>");
             $("#allList").append(trk);
@@ -39,20 +39,41 @@ function buildOptions(tableElement){
         var element = select;
         $(element).unbind("change");
         $(element).change(function(element){
-            var selectedItem = $(element.target).find("option:selected");
-            var id = $(selectedItem).val();
-            var showElements = $("." + id);
-            $(showElements).parent().hide();
-            $(showElements).each(function(){
-                if($(this).text()===$(selectedItem).text()){
-                    $(this).parent().show();
-                }else{
-                    $(this).parent().hide();
-                }
-            });
-
+            renderItems();
         });
     });
+}
+function showOrHide(selected,showColumn){
+    var showElements = $("." + showColumn+":visible");
+    if(showElements){
+    $(showElements).each(function(){
+        if($(this).text()!==selected){
+            $(this).parent().hide();
+        }else{
+            $(this).parent().show();
+        }
+    });
+    }
+}
+function renderItems(){
+
+    var checkedValues = $("select:visible option:selected");
+    if(checkedValues.length===0){
+        location.reload();
+        return;
+    }
+    for(var item in orderedItem){
+        var selectedItem = $("select:visible option[value="+orderedItem[item]+"]:selected");
+        if(selectedItem.text()==="--"){
+            $(selectedItem).parent().parent().addClass("hideSelect");
+            $("td[class]").parent().show();
+            renderItems();
+            return;
+        }
+        if(selectedItem.length!==0&&selectedItem.text()!=="--"){
+            showOrHide($(selectedItem).text(),selectedItem.val());
+        }
+    }
 }
 function selectNotContains(select,content){
     var options = $(select).find("option");
@@ -77,7 +98,7 @@ function addSelectForEveryColumn(){
             $(this).parent().parent().find("select").removeClass("hideSelect");
         });
         $(this).find(".title").append(searchBtn);
-        var option = $("<option></option>").attr("value",selectName).text("--");
+        var option = $("<option></option>").attr("value",selectName+"Class").text("--");
         var addedSelect=$("<select></select>").attr("name",selectName);
         addedSelect.append(option);
         $(addedSelect).addClass("hideSelect");
