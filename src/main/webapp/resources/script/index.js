@@ -104,14 +104,9 @@ function initialButtons(){
         }
         var selectName = $(this).attr("id");
         var filterBtn = $("<button>filter</button>").attr("id",selectName+"Filter").addClass("hideFilter");
-        $(filterBtn).bind('click',function(){
-            var select = $(this).parent().parent().find("select[name$='Filter']");
-            if($(select).hasClass("hideSelect")){
-               $(select).removeClass("hideSelect");
-            }else{
-                $(select).addClass("hideSelect");
-            }
-        });
+
+        $(filterBtn).bind('click',showFilterSelect);
+
         $(this).find(".title").append(filterBtn);
         var option = $("<option></option>").attr("value",selectName+"Class").text("--");
         var addedSelect=$("<select></select>").attr("name",selectName+"Filter");
@@ -121,26 +116,21 @@ function initialButtons(){
         $(selectDiv).append(addedSelect);
         $(this).append(selectDiv);
         var sortBtn = $("<button>sort</button>").attr("id",selectName+"Sort").addClass("hideSort");
-        $(sortBtn).bind("click",function(){
-            var tempSort = $(this).parent().parent().find("select[name$='Sort']");
-            if($(tempSort).hasClass("hideSelect")){
-                $(tempSort).removeClass("hideSelect");
-            }else{
-                $(tempSort).addClass("hideSelect");
-            }
-        })
+        $(sortBtn).bind("click",showSortSelect);
         $(this).find(".title").append(sortBtn);
 
-        var nonSelect = $("<option></option>").attr("value","none").text("--");
-        var increase = $("<option></option>").attr("value","increase").text("up");
-        var decrease = $("<option></option>").attr("value","decrease").text("down");
-        var sortSelect=$("<select></select>").attr("name",selectName+"Sort");
-        $(sortSelect).append(nonSelect);
-        $(sortSelect).append(increase);
-        $(sortSelect).append(decrease);
-        $(sortSelect).addClass("hideSelect");
+        var sortSelect = createSortSelect(selectName);
 
-
+        $(sortSelect).change(function(){
+           var changeTarget = $(this).find("option:selected").val();
+            if(changeTarget!==undefined && changeTarget!=="--"){
+               if(changeTarget==="up"){
+                  showIncrease();
+               }else if(changeTarget==="down"){
+                  showDecrease();
+               }
+            }
+        });
 
         var sortDiv = $("<div></div>").addClass("sortDivClass");
         $(sortDiv).append(sortSelect);
@@ -148,8 +138,44 @@ function initialButtons(){
 
 
     });
+
 }
 
+function showIncrease(){
+
+}
+
+function showDecrease(){
+
+}
+
+function showFilterSelect(){
+    var select = $(this).parent().parent().find("select[name$='Filter']");
+    if($(select).hasClass("hideSelect")){
+        $(select).removeClass("hideSelect");
+    }else{
+        $(select).addClass("hideSelect");
+    }
+}
+function createSortSelect(selectName){
+    var nonSelect = $("<option></option>").attr("value","none").text("--");
+    var increase = $("<option></option>").attr("value","increase").text("up");
+    var decrease = $("<option></option>").attr("value","decrease").text("down");
+    var sortSelect=$("<select></select>").attr("name",selectName+"Sort");
+    $(sortSelect).append(nonSelect);
+    $(sortSelect).append(increase);
+    $(sortSelect).append(decrease);
+    $(sortSelect).addClass("hideSelect");
+    return sortSelect;
+}
+function showSortSelect(){
+        var tempSort = $(this).parent().parent().find("select[name$='Sort']");
+        if($(tempSort).hasClass("hideSelect")){
+            $(tempSort).removeClass("hideSelect");
+        }else{
+            $(tempSort).addClass("hideSelect");
+        }
+}
 
 function filter(){
    var filters = $("button[id$='Filter']");
