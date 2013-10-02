@@ -127,7 +127,7 @@ function initialButtons(){
            var changeTarget = $(this).find("option:selected").val();
             if(changeTarget!==undefined && changeTarget!=="--"){
 
-                  showIncrease(columnName);
+                  showIncrease(columnName,changeTarget);
 
             }
         });
@@ -141,13 +141,13 @@ function initialButtons(){
 
 }
 
-function showIncrease(columnName){
+function showIncrease(columnName,changeTarget){
     var column = $("." + columnName);
     var rows = [];
     $(column).each(function(){
         rows.push($(this).text());
     });
-    if(columnName==="up"){
+    if(changeTarget==="increase"){
         var sortedRows = rows.sort();
     }else{
         var sortedRows = rows.sort().reverse();
