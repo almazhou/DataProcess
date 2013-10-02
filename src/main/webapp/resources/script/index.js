@@ -126,11 +126,9 @@ function initialButtons(){
            var columnName = columnStr.substr(0,columnStr.length-4)+"Class";
            var changeTarget = $(this).find("option:selected").val();
             if(changeTarget!==undefined && changeTarget!=="--"){
-               if(changeTarget==="increase"){
+
                   showIncrease(columnName);
-               }else if(changeTarget==="decrease"){
-                  showDecrease(columnName);
-               }
+
             }
         });
 
@@ -144,15 +142,27 @@ function initialButtons(){
 }
 
 function showIncrease(columnName){
-    var columns = $("." + columnName);
-    var tbody = $(columns).parent().empty();
-
+    var column = $("." + columnName);
+    var rows = [];
+    $(column).each(function(){
+        rows.push($(this).text());
+    });
+    if(columnName==="up"){
+        var sortedRows = rows.sort();
+    }else{
+        var sortedRows = rows.sort().reverse();
+    }
+    var detach = $(column).parent().detach();
+    for(var item in sortedRows){
+        detach.each(function(){
+            if($(this).find("."+columnName).text()===sortedRows[item]){
+                $("#allList tbody").append(this);
+            }
+        });
+    }
 }
 
-function showDecrease(columnName){
-    var columns = $("." + columnName);
-    var tbody = $(columns).parent().empty();
-}
+
 
 function showFilterSelect(){
     var select = $(this).parent().parent().find("select[name$='Filter']");
