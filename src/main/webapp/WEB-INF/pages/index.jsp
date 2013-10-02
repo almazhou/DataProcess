@@ -11,10 +11,10 @@
     <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/bootstrap/css/bootstrap-responsive.min.css" />
     <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/support/jquery-ui.css" />
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script type="text/javascript" src="<%= request.getContextPath()%>/resources/support/jquery.min.js"></script>
+    <script src="<%= request.getContextPath()%>/resources/support/jquery-ui.js"></script>
     <script src="<%=request.getContextPath()%>/resources/script/index.js"></script>
     <script src="<%=request.getContextPath()%>/resources/bootstrap/js/bootstrap.js"></script>
     <script src="<%=request.getContextPath()%>/resources/bootstrap/js/bootstrap.min.js"></script>

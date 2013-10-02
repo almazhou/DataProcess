@@ -1,7 +1,6 @@
 var orderedItem =["idClass","nameClass","accountClass","timeOnThisAccountClass","rateClass","timeToJoinClass","totalWorkYearClass","timeInTWClass","graduateClass","onceOutClass"];
 
 function initialise() {
-    initialButtons();
     $.getJSON(contextPath + "/json/employeeList", function (data) {
         employees = data["employeeList"];
         for (var i = 0; i < employees.length; i++) {
@@ -23,6 +22,7 @@ function initialise() {
 
         $("#calDate").datepicker();
     });
+    initialButtons();
     $("#searchBtn").bind("click", searchThings);
 }
 
@@ -122,12 +122,14 @@ function initialButtons(){
         var sortSelect = createSortSelect(selectName);
 
         $(sortSelect).change(function(){
+           var columnStr = $(this).attr("name");
+           var columnName = columnStr.substr(0,columnStr.length-4)+"Class";
            var changeTarget = $(this).find("option:selected").val();
             if(changeTarget!==undefined && changeTarget!=="--"){
-               if(changeTarget==="up"){
-                  showIncrease();
-               }else if(changeTarget==="down"){
-                  showDecrease();
+               if(changeTarget==="increase"){
+                  showIncrease(columnName);
+               }else if(changeTarget==="decrease"){
+                  showDecrease(columnName);
                }
             }
         });
@@ -141,12 +143,15 @@ function initialButtons(){
 
 }
 
-function showIncrease(){
+function showIncrease(columnName){
+    var columns = $("." + columnName);
+    var tbody = $(columns).parent().empty();
 
 }
 
-function showDecrease(){
-
+function showDecrease(columnName){
+    var columns = $("." + columnName);
+    var tbody = $(columns).parent().empty();
 }
 
 function showFilterSelect(){
