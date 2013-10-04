@@ -58,12 +58,7 @@ function showOrHide(selected,showColumn){
 }
 function sortTable(){
     var sorters = $("button[id$='Sort']");
-
-    if(sorters.hasClass("hideSort")){
-        sorters.removeClass("hideSort");
-    }else{
-        sorters.addClass("hideSort");
-    }
+    $(sorters).toggleClass("hideSort");
 }
 function renderItems(){
 
@@ -166,11 +161,7 @@ function showIncrease(columnName,changeTarget){
 
 function showFilterSelect(){
     var select = $(this).parent().parent().find("select[name$='Filter']");
-    if($(select).hasClass("hideSelect")){
-        $(select).removeClass("hideSelect");
-    }else{
-        $(select).addClass("hideSelect");
-    }
+    $(select).toggleClass("hideSelect");
 }
 function createSortSelect(selectName){
     var nonSelect = $("<option></option>").attr("value","none").text("--");
@@ -185,21 +176,13 @@ function createSortSelect(selectName){
 }
 function showSortSelect(){
         var tempSort = $(this).parent().parent().find("select[name$='Sort']");
-        if($(tempSort).hasClass("hideSelect")){
-            $(tempSort).removeClass("hideSelect");
-        }else{
-            $(tempSort).addClass("hideSelect");
-        }
+        $(tempSort).toggleClass("hideSelect");
 }
 
 function filter(){
    var filters = $("button[id$='Filter']");
 
-    if(filters.hasClass("hideFilter")){
-        filters.removeClass("hideFilter");
-    }else{
-        filters.addClass("hideFilter");
-    }
+    $(filters).toggleClass("hideFilter");
 
 }
 function parseSpecificDate(date){
