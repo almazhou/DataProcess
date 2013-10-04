@@ -1,6 +1,7 @@
 var orderedItem =["idClass","nameClass","accountClass","timeOnThisAccountClass","rateClass","timeToJoinClass","totalWorkYearClass","timeInTWClass","graduateClass","onceOutClass"];
 
 function initialise() {
+    initialButtons();
     $.getJSON(contextPath + "/json/employeeList", function (data) {
         employees = data["employeeList"];
         for (var i = 0; i < employees.length; i++) {
@@ -22,7 +23,6 @@ function initialise() {
 
         $("#calDate").datepicker();
     });
-    initialButtons();
     $("#searchBtn").bind("click", searchThings);
 }
 
@@ -33,7 +33,7 @@ function buildOptions(tableElement){
         var tableContent = $(this).text();
         var option = $("<option></option>").attr("value",selectName).text(tableContent);
         var appendSelect = selectName.substring(0,selectName.length-5);
-        var select = $("select[name="+appendSelect+"]");
+        var select = $("select[name="+appendSelect+"Filter]");
         if(selectNotContains(select,tableContent)){
             $(select).append(option);
         }
@@ -105,8 +105,6 @@ function initialButtons(){
         var selectName = $(this).attr("id");
         var filterBtn = $("<button>filter</button>").attr("id",selectName+"Filter").addClass("hideFilter");
 
-        $(filterBtn).bind('click',showFilterSelect);
-
         $(this).find(".title").append(filterBtn);
         var option = $("<option></option>").attr("value",selectName+"Class").text("--");
         var addedSelect=$("<select></select>").attr("name",selectName+"Filter");
@@ -115,6 +113,8 @@ function initialButtons(){
         var selectDiv = $("<div></div>").addClass("selectDivClass");
         $(selectDiv).append(addedSelect);
         $(this).append(selectDiv);
+        $(filterBtn).bind('click',showFilterSelect);
+
         var sortBtn = $("<button>sort</button>").attr("id",selectName+"Sort").addClass("hideSort");
         $(sortBtn).bind("click",showSortSelect);
         $(this).find(".title").append(sortBtn);
